@@ -1,0 +1,4 @@
+configobj
+flask
+flask-bootstrap
+python-redmine
