@@ -3,12 +3,13 @@
 {% block content %}
 <div class="container">
     {% for epic in epics %}
-    <h4><a href="{{url}}/issues/{{epic.id}}">{{epic.id}} - {{epic}} - {{epic.priority}}</a></h4>
+    <h4><a href="{{url}}/issues/{{epic.id}}">{{epic.id}} - {{epic}}</a> - {{epic.priority}} - ({{issues[epic.id]|length}})</h4>
     <table class="table table-hover table-striped table-bordered table-condensed">
         <thead>
             <th style="width: 40px">#</th>
             <th style="width: 60px">Priority</th>
             <th style="width: 140px">Status</th>
+            <th style="width: 60px">Type</th>
             <th style="width: 120px">Assigned</th>
             <th>Name</th>
             <th style="width: 150px">Updated On</th>
@@ -24,6 +25,7 @@
              <td><a href="{{url}}/issues/{{issue.id}}">{{issue.id}}</a></td>
              <td>{{issue.priority}}</td>
              <td>{{issue.status}}</td>
+             <td>{{issue.tracker}}</td>
              <td>{{issue.assigned_to}}</td>
              <td>{{issue}}</td>
              <td>{{issue.updated_on}}</td>
@@ -31,12 +33,13 @@
         {% endfor %}
     </table>
     {% endfor %}
-    <h4>Issues associated with project but not assigned to an epic</h4>
+    <h4>{{issues[0]|length}} issues associated with project but not assigned to an epic</h4>
     <table class="table table-hover table-striped table-bordered table-condensed">
         <thead>
             <th style="width: 40px">#</th>
             <th style="width: 60px">Priority</th>
             <th style="width: 140px">Status</th>
+            <th style="width: 60px">Type</th>
             <th style="width: 120px">Assigned</th>
             <th>Name</th>
             <th style="width: 150px">Updated On</th>
@@ -52,6 +55,7 @@
              <td><a href="{{url}}/issues/{{issue.id}}">{{issue.id}}</a></td>
              <td>{{issue.priority}}</td>
              <td>{{issue.status}}</td>
+             <td>{{issue.tracker}}</td>
              <td>{{issue.assigned_to}}</td>
              <td>{{issue}}</td>
              <td>{{issue.updated_on}}</td>
