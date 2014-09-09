@@ -21,20 +21,25 @@ redmine = Redmine(RM_URL, username=RM_URL, key=RM_KEY,
                   requests={'verify': False})
 
 
-def get_issues(proj, tracker):
+def get_issues(proj, tracker, **kwargs):
     issues = redmine.issue.filter(project_id=proj,
                                   status_id='open',
                                   sort='priority:desc',
-                                  tracker_id=TRACKER_MAP[tracker])
+                                  tracker_id=TRACKER_MAP[tracker],
+                                  **kwargs)
 
     return issues
 
 
-def index():
+def index(user_id=None):
     epics = get_issues(PROJ_ID, 'epic')
     issues = {}
     issues[0] = []
-    i_tmp = get_issues(PROJ_ID, 'not-epic')
+
+    if user_id:
+        i_tmp = get_issues(PROJ_ID, 'not-epic', assigned_to_id=user_id)
+    else:
+        i_tmp = get_issues(PROJ_ID, 'not-epic')
 
     for epic in epics:
         issues[int(epic.id)] = []
@@ -54,6 +59,7 @@ def create_app(configfile=None):
     app = flask.Flask('red-list')
     flask_bootstrap.Bootstrap(app)
     app.add_url_rule('/', None, index)
+    app.add_url_rule('/assigned/<int:user_id>', None, index)
 
     return app
 

@@ -26,7 +26,7 @@
              <td>{{issue.priority}}</td>
              <td>{{issue.status}}</td>
              <td>{{issue.tracker}}</td>
-             <td>{{issue.assigned_to}}</td>
+             <td>{% if issue.assigned_to %}<a href="/assigned/{{issue.assigned_to.id}}">{{issue.assigned_to}}</a>{% endif %}</td>
              <td>{{issue}}</td>
              <td>{{issue.updated_on}}</td>
          </tr>
