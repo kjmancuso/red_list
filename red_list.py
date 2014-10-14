@@ -49,7 +49,8 @@ def index(user_id=None):
             parent = int(i.parent)
         except:
             parent = 0
-        issues[parent].append(i)
+        if parent in issues:
+            issues[parent].append(i)
 
     return flask.render_template('index.html', epics=epics, issues=issues,
                                  url=RM_URL)
