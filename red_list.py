@@ -12,10 +12,10 @@ RM_URL = config['url']
 
 PROJ_ID = config['project']
 
-TRACKER_MAP = {'epic': 8,
+TRACKER_MAP = {'epic': 11,
                'bug': 1,
-               'task': 6,
-               'not-epic': '!8'}
+               'task': 12,
+               'not-epic': '!11'}
 
 redmine = Redmine(RM_URL, username=RM_URL, key=RM_KEY,
                   requests={'verify': False})
